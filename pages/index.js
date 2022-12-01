@@ -28,9 +28,9 @@ export default function HomePage() {
   }
   console.log(list);
   return (
-    <>
+    <StyledDiv>
       <Header />
-      <styledUl>
+      <StyledUl>
         {list.map(({ thought, author }) => {
           return (
             <Card
@@ -41,15 +41,17 @@ export default function HomePage() {
             />
           );
         })}
-      </styledUl>
-      <hr />
+      </StyledUl>
       <Form onAddNewListObj={handleAddNewListObj} />
-    </>
+    </StyledDiv>
   );
 }
 
-const styledUl = styled.ul`
-  list-style-type: none;
-  display: flex;
-  flex-direction: column;
+const StyledUl = styled.ul`
+  height: 100vh;
+`;
+
+const StyledDiv = styled.div`
+  position: relative;
+  background-color: #665e48;
 `;
