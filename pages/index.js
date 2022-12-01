@@ -48,7 +48,7 @@ export default function HomePage() {
 }
 
 const StyledUl = styled.ul`
-  height: 100vh;
+  min-height: 77vh;
 `;
 
 const StyledDiv = styled.div`

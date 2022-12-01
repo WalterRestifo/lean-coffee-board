@@ -80,21 +80,23 @@ export default function Card({
 }
 
 const StyledThoughtP = styled.p`
-  font-size: larger;
+  font-size: xx-large;
+  margin: 3vw;
 `;
 
 const StyledAuthorP = styled.p`
   color: #a2826a;
+  font-size: large;
+  margin: 3vw;
 `;
 
 const StyledLi = styled.li`
   border: 1px solid #3d2520;
   border-radius: 25px;
-  text-align: center;
   list-style-type: none;
-  width: 75vw;
+  width: 80vw;
   height: fit-content;
-  margin-left: 5vw;
+  margin-left: 1vw;
   margin-top: 5vh;
   margin-bottom: 5vh;
   position: relative;
@@ -109,13 +111,14 @@ const StyledRemoveButton = styled.button`
   right: 15px;
   top: 15px;
   background-color: #590202;
-
   color: #665e48;
   border: none;
   box-shadow: 1px 1px 1px #120905;
   padding-top: 4px;
   padding-left: 4px;
   padding-right: 3px;
+  width: 30px;
+  height: 30px;
 
   &:hover {
     box-shadow: 2px 2px 1px #120905;
@@ -162,7 +165,7 @@ const StyledSaveButton = styled.button`
 const StyledEditButton = styled.button`
   margin-bottom: 10px;
   position: absolute;
-  top: 45px;
+  bottom: 5px;
   right: 15px;
   border-radius: 25px;
   border: none;
@@ -172,6 +175,8 @@ const StyledEditButton = styled.button`
   padding-left: 4px;
   padding-right: 3px;
   box-shadow: 1px 1px 1px #120905;
+  width: 30px;
+  height: 30px;
 
   &:hover {
     background-color: #263829;
