@@ -103,6 +103,7 @@ const StyledLi = styled.li`
   background-color: #bcb68e;
   color: #3d2520;
   box-shadow: 2px 2px 5px #120905;
+  padding-right: 50px;
 `;
 
 const StyledRemoveButton = styled.button`
@@ -180,7 +181,7 @@ const StyledEditButton = styled.button`
 
   &:hover {
     background-color: #263829;
-    top: 44px;
+    bottom: 6px;
     box-shadow: 2px 2px 1px #120905;
     cursor: pointer;
   }
