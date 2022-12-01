@@ -2,6 +2,7 @@ import Form from "../components/Form";
 import Header from "../components/Header";
 import { useState } from "react";
 import Card from "../components/Card";
+import styled from "styled-components";
 
 export default function HomePage() {
   const [list, setList] = useState([
@@ -19,16 +20,36 @@ export default function HomePage() {
     setList([...list, newListObj]);
   }
 
+  function handleRemoveListObj(ListObj) {
+    const newList = list.filter(({ thought, author }) => {
+      return !(thought === ListObj.thought && author === ListObj.author);
+    });
+    setList(newList);
+  }
+  console.log(list);
   return (
     <>
       <Header />
-      <ul>
+      <styledUl>
         {list.map(({ thought, author }) => {
-          return <Card key={thought} thought={thought} author={author} />;
+          return (
+            <Card
+              key={thought + author}
+              thought={thought}
+              author={author}
+              onRemoveListObj={handleRemoveListObj}
+            />
+          );
         })}
-      </ul>
+      </styledUl>
       <hr />
       <Form onAddNewListObj={handleAddNewListObj} />
     </>
   );
 }
+
+const styledUl = styled.ul`
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+`;
