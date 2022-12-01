@@ -161,7 +161,9 @@ const StyledSaveButton = styled.button`
 
 const StyledEditButton = styled.button`
   margin-bottom: 10px;
-  position: relative;
+  position: absolute;
+  top: 45px;
+  right: 15px;
   border-radius: 25px;
   border: none;
   background-color: #403e25;
@@ -173,7 +175,7 @@ const StyledEditButton = styled.button`
 
   &:hover {
     background-color: #263829;
-    bottom: 1px;
+    top: 44px;
     box-shadow: 2px 2px 1px #120905;
     cursor: pointer;
   }
