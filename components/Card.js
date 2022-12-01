@@ -81,12 +81,10 @@ export default function Card({
 
 const StyledThoughtP = styled.p`
   font-size: larger;
-  text-transform: capitalize;
 `;
 
 const StyledAuthorP = styled.p`
   color: #a2826a;
-  text-transform: capitalize;
 `;
 
 const StyledLi = styled.li`
