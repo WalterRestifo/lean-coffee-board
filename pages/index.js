@@ -5,39 +5,39 @@ import Card from "../components/Card";
 import styled from "styled-components";
 
 export default function HomePage() {
-  const [list, setList] = useState([
-    {
-      thought: "will I work correctly?",
-      author: "Walter",
-    },
-    {
-      thought: "I hope so",
-      author: "Walter again",
-    },
-  ]);
+  const [list, setList] = useState([]);
 
   function handleAddNewListObj(newListObj) {
     setList([...list, newListObj]);
   }
 
-  function handleRemoveListObj(ListObj) {
-    const newList = list.filter(({ thought, author }) => {
-      return !(thought === ListObj.thought && author === ListObj.author);
+  function handleRemoveListObj(listObj) {
+    const newList = list.filter(({ thought, author, id }) => {
+      return id !== listObj.id;
     });
     setList(newList);
   }
-  console.log(list);
+
+  function handleModifyListObj(modifiedListObj) {
+    const modifiedList = list.filter(({ thought, author, id }) => {
+      return id !== modifiedListObj.id;
+    });
+    return setList([...modifiedList, modifiedListObj]);
+  }
+
   return (
     <StyledDiv>
       <Header />
       <StyledUl>
-        {list.map(({ thought, author }) => {
+        {list.map(({ thought, author, id }) => {
           return (
             <Card
-              key={thought + author}
+              key={id}
+              id={id}
               thought={thought}
               author={author}
               onRemoveListObj={handleRemoveListObj}
+              onModifyListObj={handleModifyListObj}
             />
           );
         })}

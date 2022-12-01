@@ -1,10 +1,12 @@
 import styled from "styled-components";
+import { nanoid } from "nanoid";
 
 export default function Form({ onAddNewListObj }) {
   function handleSubmit(e) {
     const newListObj = {
       thought: e.target.thoughts.value,
       author: e.target.author.value,
+      id: nanoid(),
     };
 
     e.preventDefault();
@@ -56,5 +58,6 @@ const StyledButton = styled.button`
 
   &:hover {
     background-color: #263829;
+    cursor: pointer;
   }
 `;
