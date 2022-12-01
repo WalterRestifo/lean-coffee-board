@@ -12,7 +12,7 @@ export default function HomePage() {
     },
     {
       thought: "I hope so",
-      author: "wieder Walter",
+      author: "Walter again",
     },
   ]);
 

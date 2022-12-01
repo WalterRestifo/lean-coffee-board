@@ -16,12 +16,18 @@ export default function Form({ onAddNewListObj }) {
   return (
     <StyledForm onSubmit={handleSubmit}>
       <input
+        aria-label="Type your thoughts..."
         name="thoughts"
         placeholder="Type your thoughts..."
         required
       ></input>
-      <input name="author" placeholder="Your name" required></input>
-      <StyledButton>+</StyledButton>
+      <input
+        aria-label="Your name"
+        name="author"
+        placeholder="Your name"
+        required
+      ></input>
+      <StyledButton aria-label="add new card">+</StyledButton>
     </StyledForm>
   );
 }

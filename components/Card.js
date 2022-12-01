@@ -9,7 +9,12 @@ export default function Card({ thought, author, onRemoveListObj }) {
     <StyledLi>
       <StyledThoughtP>{thought}</StyledThoughtP>
       <StyledAuthorP>{author}</StyledAuthorP>
-      <StyledButton onClick={() => onRemoveListObj(ListObj)}>X</StyledButton>
+      <StyledButton
+        aria-label="remove card"
+        onClick={() => onRemoveListObj(ListObj)}
+      >
+        X
+      </StyledButton>
     </StyledLi>
   );
 }
