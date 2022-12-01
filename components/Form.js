@@ -17,18 +17,18 @@ export default function Form({ onAddNewListObj }) {
 
   return (
     <StyledForm onSubmit={handleSubmit}>
-      <input
+      <StyledTextInput
         aria-label="Type your thoughts..."
         name="thoughts"
         placeholder="Type your thoughts..."
         required
-      ></input>
-      <input
+      ></StyledTextInput>
+      <StyledNameInput
         aria-label="Your name"
         name="author"
         placeholder="Your name"
         required
-      ></input>
+      ></StyledNameInput>
       <StyledButton aria-label="add new card">+</StyledButton>
     </StyledForm>
   );
@@ -39,10 +39,10 @@ const StyledForm = styled.form`
   bottom: 0;
 
   border: 1px solid black;
-  min-height: 7vh;
+  min-height: 10vh;
 
-  padding-top: 2vh;
-  padding-bottom: 2vh;
+  padding-top: 3vh;
+  padding-bottom: 3vh;
 
   background-color: #120905;
   color: #a2826a;
@@ -55,9 +55,19 @@ const StyledButton = styled.button`
   border-radius: 25px;
   background-color: #403e25;
   color: #a2826a;
+  width: 40px;
+  height: 40px;
 
   &:hover {
     background-color: #263829;
     cursor: pointer;
   }
+`;
+
+const StyledNameInput = styled.input`
+  width: 80px;
+`;
+
+const StyledTextInput = styled.input`
+  width: auto;
 `;
