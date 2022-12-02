@@ -1,48 +1,62 @@
 import Form from "../components/Form";
 import Header from "../components/Header";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Card from "../components/Card";
 import styled from "styled-components";
 
 export default function HomePage() {
   const [list, setList] = useState([]);
 
-  function handleAddNewListObj(newListObj) {
-    setList([...list, newListObj]);
+  async function handleRemoveListObj(id) {
+    await fetch(
+      "https://lean-coffee-board-api-nextjs.vercel.app/api/questions/" + id,
+      {
+        method: "DELETE",
+      }
+    );
+    getQuestions();
   }
 
-  function handleRemoveListObj(listObj) {
-    const newList = list.filter(({ thought, author, id }) => {
-      return id !== listObj.id;
-    });
-    setList(newList);
+  async function getQuestions() {
+    const response = await fetch(
+      "https://lean-coffee-board-api-nextjs.vercel.app/api/questions"
+    );
+    if (!response.ok) {
+      return console.error(
+        "Error with the response of the fetch. Response status: ",
+        response.status
+      );
+    } else {
+      const questionList = await response.json();
+      setList(questionList);
+    }
   }
 
-  function handleModifyListObj(modifiedListObj) {
-    const modifiedList = list.filter(({ thought, author, id }) => {
-      return id !== modifiedListObj.id;
-    });
-    return setList([...modifiedList, modifiedListObj]);
-  }
+  useEffect(() => {
+    const interval = setInterval(() => {
+      getQuestions();
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <StyledDiv>
       <Header />
       <StyledUl>
-        {list.map(({ thought, author, id }) => {
+        {list.map(({ text, name, id }) => {
           return (
             <Card
               key={id}
               id={id}
-              thought={thought}
-              author={author}
+              text={text}
+              name={name}
               onRemoveListObj={handleRemoveListObj}
-              onModifyListObj={handleModifyListObj}
+              onRerender={getQuestions}
             />
           );
         })}
       </StyledUl>
-      <Form onAddNewListObj={handleAddNewListObj} />
+      <Form onRerender={getQuestions} />
     </StyledDiv>
   );
 }

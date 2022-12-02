@@ -1,31 +1,38 @@
 import styled from "styled-components";
-import { nanoid } from "nanoid";
 
-export default function Form({ onAddNewListObj }) {
-  function handleSubmit(e) {
-    const newListObj = {
-      thought: e.target.thoughts.value,
-      author: e.target.author.value,
-      id: nanoid(),
-    };
-
+export default function Form({ onRerender }) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    onAddNewListObj(newListObj);
+    const newListObj = {
+      name: e.target.name.value,
+      text: e.target.text.value,
+    };
+    await fetch(
+      "https://lean-coffee-board-api-nextjs.vercel.app/api/questions",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newListObj),
+      }
+    );
+    onRerender();
     e.target.reset();
-    e.target.thoughts.focus();
+    e.target.text.focus();
   }
 
   return (
     <StyledForm onSubmit={handleSubmit}>
       <StyledTextInput
         aria-label="Type your thoughts..."
-        name="thoughts"
+        name="text"
         placeholder="Type your thoughts..."
         required
       ></StyledTextInput>
       <StyledNameInput
         aria-label="Your name"
-        name="author"
+        name="name"
         placeholder="Your name"
         required
       ></StyledNameInput>

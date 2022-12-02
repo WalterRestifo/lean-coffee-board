@@ -4,33 +4,26 @@ import { CiTrash } from "react-icons/ci";
 import { SlPencil } from "react-icons/sl";
 import { BiCheck } from "react-icons/bi";
 
-export default function Card({
-  thought,
-  author,
-  onRemoveListObj,
-  id,
-  onModifyListObj,
-}) {
+export default function Card({ text, name, onRemoveListObj, id, onRerender }) {
   const [isBeingEdited, setIsBeingEdited] = useState(false);
 
-  const listObj = {
-    thought: thought,
-    author: author,
-    id: id,
-  };
-
-  const modifiedListObj = {
-    thought: "",
-    author: "",
-    id: "",
-  };
-
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    modifiedListObj.thought = e.target.modifyThoughts.value;
-    modifiedListObj.author = e.target.modifyAuthor.value;
-    modifiedListObj.id = id;
-    onModifyListObj(modifiedListObj);
+    const modifiedListObj = {
+      name: e.target.modifyAuthor.value,
+      text: e.target.modifyThoughts.value,
+    };
+    await fetch(
+      "https://lean-coffee-board-api-nextjs.vercel.app/api/questions/" + id,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(modifiedListObj),
+      }
+    );
+    onRerender();
     return setIsBeingEdited(false);
   }
 
@@ -46,13 +39,13 @@ export default function Card({
             aria-label="Modify your thoughts..."
             name="modifyThoughts"
             required
-            placeholder={thought}
+            placeholder={text}
           ></StyledInput>
           <StyledInput
             aria-label="Modify your name"
             name="modifyAuthor"
             required
-            placeholder={author}
+            placeholder={name}
           ></StyledInput>
           <StyledSaveButton>
             <BiCheck />
@@ -63,11 +56,11 @@ export default function Card({
   } else {
     return (
       <StyledLi>
-        <StyledThoughtP>{thought}</StyledThoughtP>
-        <StyledAuthorP>{author}</StyledAuthorP>
+        <StyledThoughtP>{text}</StyledThoughtP>
+        <StyledAuthorP>{name}</StyledAuthorP>
         <StyledRemoveButton
           aria-label="remove card"
-          onClick={() => onRemoveListObj(listObj)}
+          onClick={() => onRemoveListObj(id)}
         >
           <CiTrash />
         </StyledRemoveButton>
