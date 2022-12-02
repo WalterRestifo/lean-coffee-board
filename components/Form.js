@@ -1,31 +1,29 @@
 import styled from "styled-components";
-import { nanoid } from "nanoid";
 
 export default function Form({ onAddNewListObj }) {
   function handleSubmit(e) {
     const newListObj = {
-      thought: e.target.thoughts.value,
-      author: e.target.author.value,
-      id: nanoid(),
+      name: e.target.name.value,
+      text: e.target.text.value,
     };
 
     e.preventDefault();
     onAddNewListObj(newListObj);
     e.target.reset();
-    e.target.thoughts.focus();
+    e.target.text.focus();
   }
 
   return (
     <StyledForm onSubmit={handleSubmit}>
       <StyledTextInput
         aria-label="Type your thoughts..."
-        name="thoughts"
+        name="text"
         placeholder="Type your thoughts..."
         required
       ></StyledTextInput>
       <StyledNameInput
         aria-label="Your name"
-        name="author"
+        name="name"
         placeholder="Your name"
         required
       ></StyledNameInput>

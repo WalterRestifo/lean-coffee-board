@@ -5,8 +5,8 @@ import { SlPencil } from "react-icons/sl";
 import { BiCheck } from "react-icons/bi";
 
 export default function Card({
-  thought,
-  author,
+  text,
+  name,
   onRemoveListObj,
   id,
   onModifyListObj,
@@ -14,21 +14,20 @@ export default function Card({
   const [isBeingEdited, setIsBeingEdited] = useState(false);
 
   const listObj = {
-    thought: thought,
-    author: author,
-    id: id,
+    name: name,
+    text: text,
   };
 
   const modifiedListObj = {
-    thought: "",
-    author: "",
+    name: "",
     id: "",
+    text: "",
   };
 
   function handleSubmit(e) {
     e.preventDefault();
-    modifiedListObj.thought = e.target.modifyThoughts.value;
-    modifiedListObj.author = e.target.modifyAuthor.value;
+    modifiedListObj.text = e.target.modifyThoughts.value;
+    modifiedListObj.name = e.target.modifyAuthor.value;
     modifiedListObj.id = id;
     onModifyListObj(modifiedListObj);
     return setIsBeingEdited(false);
@@ -46,13 +45,13 @@ export default function Card({
             aria-label="Modify your thoughts..."
             name="modifyThoughts"
             required
-            placeholder={thought}
+            placeholder={text}
           ></StyledInput>
           <StyledInput
             aria-label="Modify your name"
             name="modifyAuthor"
             required
-            placeholder={author}
+            placeholder={name}
           ></StyledInput>
           <StyledSaveButton>
             <BiCheck />
@@ -63,11 +62,11 @@ export default function Card({
   } else {
     return (
       <StyledLi>
-        <StyledThoughtP>{thought}</StyledThoughtP>
-        <StyledAuthorP>{author}</StyledAuthorP>
+        <StyledThoughtP>{text}</StyledThoughtP>
+        <StyledAuthorP>{name}</StyledAuthorP>
         <StyledRemoveButton
           aria-label="remove card"
-          onClick={() => onRemoveListObj(listObj)}
+          onClick={() => onRemoveListObj(id)}
         >
           <CiTrash />
         </StyledRemoveButton>
