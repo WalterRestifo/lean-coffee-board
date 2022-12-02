@@ -33,7 +33,10 @@ export default function HomePage() {
   }
 
   useEffect(() => {
-    getQuestions();
+    const interval = setInterval(() => {
+      getQuestions();
+    }, 1000);
+    return () => clearInterval(interval);
   }, []);
 
   return (
