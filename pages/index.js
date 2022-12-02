@@ -7,40 +7,11 @@ import styled from "styled-components";
 export default function HomePage() {
   const [list, setList] = useState([]);
 
-  async function handleAddNewListObj(newListObj) {
-    await fetch(
-      "https://lean-coffee-board-api-nextjs.vercel.app/api/questions",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newListObj),
-      }
-    );
-    getQuestions();
-  }
-
   async function handleRemoveListObj(id) {
     await fetch(
       "https://lean-coffee-board-api-nextjs.vercel.app/api/questions/" + id,
       {
         method: "DELETE",
-      }
-    );
-    getQuestions();
-  }
-
-  async function handleModifyListObj(modifiedListObj) {
-    await fetch(
-      "https://lean-coffee-board-api-nextjs.vercel.app/api/questions/" +
-        modifiedListObj.id,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(modifiedListObj),
       }
     );
     getQuestions();
@@ -77,12 +48,12 @@ export default function HomePage() {
               text={text}
               name={name}
               onRemoveListObj={handleRemoveListObj}
-              onModifyListObj={handleModifyListObj}
+              onRerender={getQuestions}
             />
           );
         })}
       </StyledUl>
-      <Form onAddNewListObj={handleAddNewListObj} />
+      <Form onRerender={getQuestions} />
     </StyledDiv>
   );
 }

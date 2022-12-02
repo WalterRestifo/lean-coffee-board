@@ -1,14 +1,23 @@
 import styled from "styled-components";
 
-export default function Form({ onAddNewListObj }) {
-  function handleSubmit(e) {
+export default function Form({ onRerender }) {
+  async function handleSubmit(e) {
+    e.preventDefault();
     const newListObj = {
       name: e.target.name.value,
       text: e.target.text.value,
     };
-
-    e.preventDefault();
-    onAddNewListObj(newListObj);
+    await fetch(
+      "https://lean-coffee-board-api-nextjs.vercel.app/api/questions",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newListObj),
+      }
+    );
+    onRerender();
     e.target.reset();
     e.target.text.focus();
   }
